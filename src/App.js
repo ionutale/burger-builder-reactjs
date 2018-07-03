@@ -10,7 +10,7 @@ class App extends Component {
           <BugerBuilder>
           </BugerBuilder>
         </Layout>
-      </div>
+      </div> 
     );
   }
 }
