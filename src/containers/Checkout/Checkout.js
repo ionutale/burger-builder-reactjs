@@ -30,7 +30,6 @@ class Checkout extends Component {
         }
 
         this.setState({ ingredients: ingredients, totalPrice: price })
-        console.log("this.state.totalPrice", this.state.totalPrice)
     }
 
     checkoutCancelledHandler = () => {

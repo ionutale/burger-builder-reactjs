@@ -3,7 +3,8 @@ import classes from './Button.css'
 
 const Button = (props) => {
     return(
-        <button 
+        <button
+        disabled={props.disabled}
         className={[classes.Button, classes[props.btnType]].join(' ')}
         onClick={props.clicked}>{props.children}</button>
     )

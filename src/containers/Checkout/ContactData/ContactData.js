@@ -88,10 +88,11 @@ class ContactData extends Component {
                     validation : {
                         required: true
                     },
-                    valid: false,
+                    valid: true,
                     touched: false
                 }
         },
+        formIsValid: false,
         loading: false
     }
 
@@ -153,7 +154,7 @@ class ContactData extends Component {
     }
 
     inputChangedHandler = (e, inputIdentifier) => {
-        console.log(e.target.value)
+
         const updatedOrderForm = {
             ...this.state.orderForm
         }
@@ -165,9 +166,16 @@ class ContactData extends Component {
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
         updatedFormElement.touched = true
 
-        console.log("updatedFormElement.valid: ", updatedFormElement.valid)
+        let formIsValid = true
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = 
+                updatedOrderForm[inputIdentifier].valid &&
+                formIsValid
+        }
+
+        console.log(formIsValid)
         updatedOrderForm[inputIdentifier] = updatedFormElement
-        this.setState({orderForm: updatedOrderForm})
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid})
     }
 
     render() {
@@ -178,7 +186,7 @@ class ContactData extends Component {
                 config: this.state.orderForm[key],
             })
         }
-        console.log(formElementsArray)
+
         let form = (
             <form onSubmit={this.orderHandler}>
                 {formElementsArray.map(formElement => {
@@ -195,8 +203,9 @@ class ContactData extends Component {
                 })}
 
                 <Button 
-                btnType="Success"
-                clicked={this.orderHandler}
+                    btnType="Success"
+                    clicked={this.orderHandler}
+                    disabled={!this.state.formIsValid}
                 >ORDER</Button>
             </form>
         )
