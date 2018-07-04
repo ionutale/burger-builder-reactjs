@@ -18,10 +18,16 @@ const Input = (props) => {
             break
         
         case('select'):
-            inputElement = <textarea 
-            className={classes.InputElement} 
-            {...props.elementConfig} 
-            value={props.value}/>
+            inputElement = ( 
+            <select 
+                className={classes.InputElement} 
+                value={props.value}> 
+                {props.elementConfig.options.map(option => {
+                    return <option key={option.value} value={option.value} >{option.displayValue} </option>
+                })}
+            </select>
+            
+        )
             break
 
         default: 
