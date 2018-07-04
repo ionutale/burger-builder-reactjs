@@ -8,7 +8,8 @@ const Input = (props) => {
             className={classes.InputElement} 
             {...props.elementConfig} 
             value={props.value}
-            onChange={props.changed}/>
+            onChange={props.changed}
+            />
             break
 
         case('textArea'):
@@ -16,7 +17,8 @@ const Input = (props) => {
             className={classes.InputElement} 
             {...props.elementConfig} 
             value={props.value}
-            onChange={props.changed}/> )
+            onChange={props.changed}
+            /> )
             break
         
         case('select'):
@@ -24,7 +26,8 @@ const Input = (props) => {
             <select 
                 className={classes.InputElement} 
                 value={props.value}
-                onChange={props.changed}> 
+                onChange={props.changed}
+            > 
                 {props.elementConfig.options.map(option => {
                     return <option key={option.value} value={option.value} >{option.displayValue} </option>
                 })}
@@ -38,7 +41,8 @@ const Input = (props) => {
         className={classes.InputElement} 
         {...props.elementConfig} 
         value={props.value}
-        onChange={props.changed}/>
+        onChange={props.changed}
+            />
         break
 
     }
