@@ -130,18 +130,19 @@ class ContactData extends Component {
     }
 
     checkValidity(value, rules) {
-        let isValid = false
+        let isValid = true
         if (rules.required) {
-            isValid = value.trim() !== ''
+            isValid = value.trim() !== '' && isValid
         }
 
-        if (rules.minLegth) {
-            isValid = value.length >= rules.minLength
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid
         }
 
         if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength
+            isValid = value.length <= rules.maxLength && isValid
         }
+
         return isValid
     }
 
@@ -156,7 +157,7 @@ class ContactData extends Component {
         
         updatedFormElement.value = e.target.value
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
-        console.log(updatedFormElement.valid)
+        console.log("updatedFormElement.valid: ", updatedFormElement.valid)
         updatedOrderForm[inputIdentifier] = updatedFormElement
         this.setState({orderForm: updatedOrderForm})
     }
