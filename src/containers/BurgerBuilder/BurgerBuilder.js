@@ -28,8 +28,7 @@ class BugerBuilder extends Component {
     componentDidMount () {
         axios.get('/ingredients.json')
         .then( response => {
-            console.log(response);
-            this.setState({ingredients: response.data})
+            this.setState({ingredients: response.data, loading: true})
         })
         .catch(error => {
             console.log(error)
@@ -91,31 +90,46 @@ class BugerBuilder extends Component {
     }
 
     purchanseContinueHandler = () => {
-        this.setState({loading: true})
-        const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.price,
-            customer: {
-                name: 'Ion',
-                address: {
-                    street: 'Teststreet 1',
-                    zipCode: '21435',
-                    country: 'italy'
-                },
-                email:'test@test.com'
-            },
-            deliveryMode: 'fastest'
+        // this.setState({loading: true})
+        // const order = {
+        //     ingredients: this.state.ingredients,
+        //     price: this.state.price,
+        //     customer: {
+        //         name: 'Ion',
+        //         address: {
+        //             street: 'Teststreet 1',
+        //             zipCode: '21435',
+        //             country: 'italy'
+        //         },
+        //         email:'test@test.com'
+        //     },
+        //     deliveryMode: 'fastest'
+        // }
+
+        // axios.post('/orders', {order})
+        // .then(response => {
+        //     console.log(response)
+        //     this.setState({loading: false, purchasing: false})
+        // })
+        // .catch(error => {
+        //     console.log(error)
+        //     this.setState({loading: false})
+
+        // })
+
+        const queryParams = []
+        for (let i in this.state.ingredients) {
+            queryParams.push(
+            encodeURIComponent(i) + 
+            '=' + 
+            encodeURIComponent(this.state.ingredients[i]))
         }
 
-        axios.post('/orders', {order})
-        .then(response => {
-            console.log(response)
-            this.setState({loading: false, purchasing: false})
-        })
-        .catch(error => {
-            console.log(error)
-            this.setState({loading: false})
+        const queryString = queryParams.join('&')
 
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
         })
     }
 
