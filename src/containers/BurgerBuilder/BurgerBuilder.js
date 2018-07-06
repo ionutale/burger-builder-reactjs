@@ -21,7 +21,6 @@ const INGREDIENT_PRICES = {
 
 class BugerBuilder extends Component {
     state = {
-        purchasable: false,
         purchasing: false,
         loading: true,
         error: false
@@ -48,7 +47,7 @@ class BugerBuilder extends Component {
             return sum + el
         }, 0)
 
-        this.setState({purchasable: sum > 0})
+        return sum > 0
     }
 
     addIngredientHandler = (type) => {
@@ -127,7 +126,7 @@ class BugerBuilder extends Component {
                         ingredientAdded={this.props.onIngredientAdded}
                         ingredientRemoved={this.props.onIngredientRemoved}
                         disabled={disabledInfo}
-                        purchasable={this.state.purchasable}
+                        purchasable={this.updatePurchase(this.props.ing)}
                         ordered={this.purchanseHandler}
                         price={this.props.price}
                         />
