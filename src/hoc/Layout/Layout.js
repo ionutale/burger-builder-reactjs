@@ -11,6 +11,9 @@ class Layout extends Component {
         showSideDrawer: false
     }
 
+
+    componen
+
     sideDrawerClosedHandler = () => {
         this.setState( { showSideDrawer: false } );
     }
@@ -46,3 +49,6 @@ const mapStateToProps = state => {
 };
 
 export default connect( mapStateToProps )( Layout );
+
+
+
